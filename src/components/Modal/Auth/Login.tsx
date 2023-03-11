@@ -98,6 +98,7 @@ const Login: React.FC<LoginProps> = () => {
         <Text
           fontSize="9pt"
           color="blue.500"
+          fontWeight={700}
           cursor="pointer"
           onClick={() =>
             setAuthModalState((prev) => ({
