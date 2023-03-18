@@ -18,7 +18,7 @@ const OAuthButtons: React.FC = () => {
         <Image src="/images/googlelogo.png" height="20px" mr={4} />
         Continue with Google
       </Button>
-      {error && <Text>{error.message}</Text>};
+      {error && <Text>{error.message}</Text>}
     </Flex>
   );
 };
