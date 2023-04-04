@@ -180,7 +180,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
                   </Checkbox>
                   <Checkbox
                     name="restricted"
-                    isChecked={communityType === "restriced"}
+                    isChecked={communityType === "restricted"}
                     onChange={onCommunityTypeChange}
                   >
                     <Flex align="center">
