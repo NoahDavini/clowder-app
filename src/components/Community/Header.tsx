@@ -1,7 +1,6 @@
 import { Community } from "@/src/atoms/communitiesAtom";
-import { Box, Button, Flex, Icon, Image, Text } from "@chakra-ui/react";
+import { Box, Button, Flex, Image, Text } from "@chakra-ui/react";
 import React from "react";
-import { FaReddit } from "react-icons/fa";
 import useCommunityData from "@/src/hooks/useCommunityData";
 
 type HeaderProps = {
@@ -17,20 +16,30 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
 
   return (
     <Flex direction="column" width="100%" height="146px">
-      <Box height="50%" bg="blue.400" />
+      <Box height="50%" bg="gray.400" />
       <Flex justify="center" bg="white" flexGrow={1}>
         <Flex width="95%" maxWidth="860px">
-          {communityData.imageURL ? (
-            <Image />
-          ) : (
-            <Icon
-              as={FaReddit}
-              fontSize={64}
+          {communityStateValue.currentCommunity?.imageURL ? (
+            <Image
+              src={communityStateValue.currentCommunity.imageURL}
+              borderRadius="full"
+              boxSize="66px"
+              alt="Community Image"
               position="relative"
               top={-3}
               color="blue.500"
               border="4px solid white"
-              borderRadius="50%"
+            />
+          ) : (
+            <Image
+              src="/images/tvpartyIcon2.png"
+              borderRadius="full"
+              boxSize="66px"
+              alt="Community Image"
+              position="relative"
+              top={-3}
+              color="blue.500"
+              border="4px solid white"
             />
           )}
           <Flex padding="10px 16px">
@@ -39,7 +48,7 @@ const Header: React.FC<HeaderProps> = ({ communityData }) => {
                 {communityData.id}
               </Text>
               <Text fontWeight={800} fontSize="10pt" color="gray.400">
-                r/{communityData.id}
+                {communityData.id}
               </Text>
             </Flex>
             <Button

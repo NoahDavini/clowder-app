@@ -1,6 +1,6 @@
 import { authModalState } from "@/src/atoms/authModalAtom";
 import { auth } from "@/src/firebase/clientApp";
-import { Flex, Icon, Input } from "@chakra-ui/react";
+import { Flex, Icon, Input, Image } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
@@ -20,7 +20,7 @@ const CreatePostLink: React.FC = () => {
       return;
     }
     const { communityId } = router.query;
-    router.push(`r/${communityId}/submit`);
+    router.push(`${communityId}/submit`);
   };
 
   return (
@@ -35,7 +35,7 @@ const CreatePostLink: React.FC = () => {
       p={2}
       mb={4}
     >
-      <Icon as={FaReddit} fontSize={36} color="gray.300" mr={4} />
+      {/* <Image src="/images/tvpartyIcon2.png" height="36px" mr={2} /> */}
       <Input
         placeholder="Create Post"
         fontSize="10pt"
