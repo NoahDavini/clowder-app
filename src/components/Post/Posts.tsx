@@ -4,16 +4,23 @@ import { auth, firestore } from "@/src/firebase/clientApp";
 import usePosts from "@/src/hooks/usePosts";
 import { Stack } from "@chakra-ui/react";
 import { collection, getDocs, orderBy, query, where } from "firebase/firestore";
+import { useRouter } from "next/router";
 import React, { useEffect, useState } from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
 import PostItem from "./PostItem";
 import PostLoader from "./PostLoader";
 
 type PostsProps = {
-  communityData: Community;
+  communityData?: Community;
+  userId?: string;
+  loadingUser: boolean;
 };
 
-const Posts: React.FC<PostsProps> = ({ communityData }) => {
+const Posts: React.FC<PostsProps> = ({
+  communityData,
+  userId,
+  loadingUser,
+}) => {
   const [user] = useAuthState(auth);
   const [loading, setLoading] = useState(false);
   const {
@@ -49,7 +56,7 @@ const Posts: React.FC<PostsProps> = ({ communityData }) => {
 
   useEffect(() => {
     getPosts();
-  }, []);
+  }, [communityData]);
 
   return (
     <>

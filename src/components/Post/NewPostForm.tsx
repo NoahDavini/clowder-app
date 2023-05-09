@@ -22,6 +22,7 @@ import PostTabItem from "./PostTabItem";
 
 type NewPostFormProps = {
   user: User;
+  communityImageURL?: string;
 };
 
 const formTabs: TabItem[] = [
@@ -52,7 +53,10 @@ export type TabItem = {
   icon: typeof Icon.arguments;
 };
 
-const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
+const NewPostForm: React.FC<NewPostFormProps> = ({
+  user,
+  communityImageURL,
+}) => {
   const router = useRouter();
   const [selectedTab, setSelectedTab] = useState(formTabs[0].title);
   const [textInputs, setTextInputs] = useState({
@@ -68,6 +72,7 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
     // create new post object => type Post
     const newPost: Post = {
       communityId: communityId as string,
+      communityImageURL: communityImageURL || "",
       creatorId: user.uid,
       creatorDisplayName: user.email!.split("@")[0],
       title: textInputs.title,
@@ -116,8 +121,8 @@ const NewPostForm: React.FC<NewPostFormProps> = ({ user }) => {
   };
 
   return (
-    <Flex direction="column" bg="white" borderRadius={4} mt={2}>
-      <Flex width="100%">
+    <Flex direction="column" bg="brand.100" borderRadius={4}>
+      <Flex width="100%" bg="brand.400">
         {formTabs.map((item) => (
           <PostTabItem
             key={item.title}

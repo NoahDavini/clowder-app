@@ -17,12 +17,32 @@ export interface CommunitySnippet {
 }
 
 interface CommunityState {
+  [key: string]:
+    | CommunitySnippet[]
+    | { [key: string]: Community }
+    | Community
+    | boolean
+    | undefined;
   mySnippets: CommunitySnippet[];
+  initSnippetsFetched: boolean;
+  visitedCommunities: {
+    [key: string]: Community;
+  };
   currentCommunity?: Community;
 }
 
+export const defaultCommunity: Community = {
+  id: "",
+  creatorId: "",
+  numberOfMembers: 0,
+  privacyType: "public",
+};
+
 const defaultCommunityState: CommunityState = {
   mySnippets: [],
+  initSnippetsFetched: false,
+  visitedCommunities: {},
+  currentCommunity: defaultCommunity,
 };
 
 export const communityState = atom<CommunityState>({

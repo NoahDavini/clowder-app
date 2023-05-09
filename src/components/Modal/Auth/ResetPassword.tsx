@@ -5,6 +5,7 @@ import { BsDot } from "react-icons/bs";
 import { authModalState } from "@/src/atoms/authModalAtom";
 import { auth } from "@/src/firebase/clientApp";
 import { useSetRecoilState } from "recoil";
+import { GiCat } from "react-icons/gi";
 
 const ResetPassword: React.FC = () => {
   const setAuthModalState = useSetRecoilState(authModalState);
@@ -21,7 +22,7 @@ const ResetPassword: React.FC = () => {
   };
   return (
     <Flex direction="column" alignItems="center" width="100%">
-      <Image src="/images/tvpartyLogo.png" height="40px" mb={4} />
+      <Icon as={GiCat} color="brand.400" fontSize={40} mb={2} />
       <Text fontWeight={700} mb={2}>
         Reset your password
       </Text>
@@ -42,21 +43,19 @@ const ResetPassword: React.FC = () => {
               mb={2}
               onChange={(event) => setEmail(event.target.value)}
               fontSize="10pt"
-              _placeholder={{ color: "gray.500" }}
+              _placeholder={{ color: "brand.300" }}
               _hover={{
-                bg: "white",
-                border: "1px solid",
-                borderColor: "blue.500",
+                borderColor: "brand.400",
               }}
               _focus={{
                 outline: "none",
-                bg: "white",
-                border: "1px solid",
-                borderColor: "blue.500",
+                borderColor: "brand.400",
               }}
-              bg="gray.50"
+              bg="brand.100"
+              border="1px solid"
+              borderColor="brand.100"
             />
-            <Text textAlign="center" fontSize="10pt" color="red">
+            <Text textAlign="center" fontSize="10pt" color="brand.200">
               {error?.message}
             </Text>
             <Button
@@ -75,7 +74,7 @@ const ResetPassword: React.FC = () => {
       <Flex
         alignItems="center"
         fontSize="9pt"
-        color="blue.500"
+        color="brand.300"
         fontWeight={700}
         cursor="pointer"
       >

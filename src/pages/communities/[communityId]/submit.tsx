@@ -15,10 +15,17 @@ const SubmitPostPage: React.FC = () => {
   return (
     <PageContent>
       <>
-        <Box p="14px 0px" borderBottom="1px solid" borderColor="white">
-          <Text>Create a post</Text>
+        <Box p="14px 0px" bg="brand.400" borderRadius="4px 4px 0px 0px">
+          <Text fontWeight={700} color="brand.100" pl={4}>
+            Create a post
+          </Text>
         </Box>
-        {user && <NewPostForm user={user} />}
+        {user && (
+          <NewPostForm
+            user={user}
+            communityImageURL={communityStateValue.currentCommunity?.imageURL}
+          />
+        )}
       </>
       <>
         {communityStateValue.currentCommunity && (

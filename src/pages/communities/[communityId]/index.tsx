@@ -5,20 +5,22 @@ import CreatePostLink from "@/src/components/Community/CreatePostLink";
 import Header from "@/src/components/Community/Header";
 import PageContent from "@/src/components/Layout/PageContent";
 import Posts from "@/src/components/Post/Posts";
-import { firestore } from "@/src/firebase/clientApp";
+import { auth, firestore } from "@/src/firebase/clientApp";
 import { doc, getDoc } from "firebase/firestore";
-import { GetServerSidePropsContext } from "next";
+import { GetServerSidePropsContext, NextPage } from "next";
 import React, { useEffect } from "react";
-import { useSetRecoilState } from "recoil";
+import { useAuthState } from "react-firebase-hooks/auth";
+import { useRecoilState } from "recoil";
 import safeJsonStringify from "safe-json-stringify";
 
 type CommunityPageProps = {
   communityData: Community;
 };
 
-const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
-  console.log("Here is data", communityData);
-  const setCommunityStateValue = useSetRecoilState(communityState);
+const CommunityPage: NextPage<CommunityPageProps> = ({ communityData }) => {
+  const [user, loadingUser] = useAuthState(auth);
+  const [communityStateValue, setCommunityStateValue] =
+    useRecoilState(communityState);
 
   if (!communityData) {
     return <CommunityNotFound />;
@@ -29,7 +31,7 @@ const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
       ...prev,
       currentCommunity: communityData,
     }));
-  }, []);
+  }, [communityData]);
 
   return (
     <>
@@ -37,7 +39,11 @@ const CommunityPage: React.FC<CommunityPageProps> = ({ communityData }) => {
       <PageContent>
         <>
           <CreatePostLink />
-          <Posts communityData={communityData} />
+          <Posts
+            communityData={communityData}
+            userId={user?.uid}
+            loadingUser={loadingUser}
+          />
         </>
         <>
           <About communityData={communityData} />

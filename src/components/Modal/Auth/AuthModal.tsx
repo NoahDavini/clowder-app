@@ -38,20 +38,40 @@ const AuthModal: React.FC = () => {
   return (
     <>
       <Modal isOpen={modalState.open} onClose={handleClose}>
-        <ModalOverlay />
-        <ModalContent>
-          <ModalHeader textAlign="center">
+        <ModalOverlay backdropFilter="blur(5px)" />
+        <ModalContent borderRadius="10px">
+          <ModalHeader
+            textAlign="center"
+            color="brand.100"
+            bg="brand.400"
+            borderRadius="10px 10px 0px 0px"
+          >
             {modalState.view === "login" && "Login"}
             {modalState.view === "signup" && "Sign Up"}
             {modalState.view === "resetPassword" && "Reset Password"}
           </ModalHeader>
-          <ModalCloseButton />
+          <ModalCloseButton
+            color="brand.100"
+            border="1px solid"
+            borderColor="brand.400"
+            _hover={{
+              border: "1px solid",
+              borderColor: "brand.100",
+            }}
+            _focus={{
+              outline: "none",
+              border: "1px solid",
+              borderColor: "brand.100",
+            }}
+          />
           <ModalBody
             display="flex"
             flexDirection="column"
             alignItems="center"
             justifyContent="center"
             pb={6}
+            bg="brand.100"
+            borderRadius="0px 0px 10px 10px"
           >
             <Flex
               direction="column"
@@ -62,7 +82,7 @@ const AuthModal: React.FC = () => {
               {modalState.view === "login" || modalState.view === "signup" ? (
                 <>
                   <OAuthButtons />
-                  <Text color="gray.500" fontWeight={700}>
+                  <Text color="brand.300" fontWeight={700}>
                     OR
                   </Text>
                   <AuthInputs />

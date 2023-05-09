@@ -1,6 +1,5 @@
-import { Box, Flex, Icon } from "@chakra-ui/react";
-import { BsArrowUpRightCircle, BsChatDots } from "react-icons/bs";
-import { GrAdd } from "react-icons/gr";
+import { Flex, Icon } from "@chakra-ui/react";
+import { BsArrowUpRightCircle, BsChatDots, BsPlusLg } from "react-icons/bs";
 import {
   IoFilterCircleOutline,
   IoNotificationsOutline,
@@ -14,37 +13,43 @@ const Icons: React.FC = () => {
         display={{ base: "none", md: "flex" }}
         align="center"
         borderRight="1px solid"
-        borderColor="gray.200"
+        borderColor="brand.100"
       >
         <Flex
           mr={1.5}
           ml={1.5}
           padding={1}
           cursor="pointer"
+          border="1px solid"
+          borderColor="brand.400"
           borderRadius={4}
-          _hover={{ bg: "gray.200" }}
+          _hover={{ borderColor: "brand.100" }}
         >
-          <Icon as={BsArrowUpRightCircle} fontSize={20} />
+          <Icon as={BsArrowUpRightCircle} fontSize={20} color="brand.100" />
         </Flex>
         <Flex
           mr={1.5}
           ml={1.5}
           padding={1}
           cursor="pointer"
+          border="1px solid"
+          borderColor="brand.400"
           borderRadius={4}
-          _hover={{ bg: "gray.200" }}
+          _hover={{ borderColor: "brand.100" }}
         >
-          <Icon as={IoFilterCircleOutline} fontSize={22} />
+          <Icon as={IoFilterCircleOutline} fontSize={22} color="brand.100" />
         </Flex>
         <Flex
           mr={1.5}
           ml={1.5}
           padding={1}
           cursor="pointer"
+          border="1px solid"
+          borderColor="brand.400"
           borderRadius={4}
-          _hover={{ bg: "gray.200" }}
+          _hover={{ borderColor: "brand.100" }}
         >
-          <Icon as={IoVideocamOutline} fontSize={22} />
+          <Icon as={IoVideocamOutline} fontSize={22} color="brand.100" />
         </Flex>
       </Flex>
       <>
@@ -53,20 +58,24 @@ const Icons: React.FC = () => {
           ml={1.5}
           padding={1}
           cursor="pointer"
+          border="1px solid"
+          borderColor="brand.400"
           borderRadius={4}
-          _hover={{ bg: "gray.200" }}
+          _hover={{ borderColor: "brand.100" }}
         >
-          <Icon as={BsChatDots} fontSize={20} />
+          <Icon as={BsChatDots} fontSize={20} color="brand.100" />
         </Flex>
         <Flex
           mr={1.5}
           ml={1.5}
           padding={1}
           cursor="pointer"
+          border="1px solid"
+          borderColor="brand.400"
           borderRadius={4}
-          _hover={{ bg: "gray.200" }}
+          _hover={{ borderColor: "brand.100" }}
         >
-          <Icon as={IoNotificationsOutline} fontSize={20} />
+          <Icon as={IoNotificationsOutline} fontSize={20} color="brand.100" />
         </Flex>
         <Flex
           display={{ base: "none", md: "flex" }}
@@ -74,10 +83,12 @@ const Icons: React.FC = () => {
           ml={1.5}
           padding={1}
           cursor="pointer"
+          border="1px solid"
+          borderColor="brand.400"
           borderRadius={4}
-          _hover={{ bg: "gray.200" }}
+          _hover={{ borderColor: "brand.100" }}
         >
-          <Icon as={GrAdd} fontSize={20} />
+          <Icon as={BsPlusLg} fontSize={22} color="brand.100" />
         </Flex>
       </>
     </Flex>

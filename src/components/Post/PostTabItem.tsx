@@ -21,11 +21,18 @@ const PostTabItem: React.FC<PostTabItemProps> = ({
       p="14px 0px"
       cursor="pointer"
       fontWeight={700}
-      _hover={{ bg: "gray.50" }}
-      color={selected ? "blue.500" : "gray.500"}
-      borderWidth={selected ? "0px 1px 2px 0px" : "0px 1px 1px 0px"}
-      borderBottom={selected ? "blue.500" : "gray.200"}
-      borderRightColor="gray.200"
+      borderRadius={selected ? "4px 4px 0px 0px" : "0px"}
+      _hover={
+        !selected
+          ? {
+              bg: "brand.300",
+              color: "brand.100",
+              borderRadius: "4px 4px 0px 0px",
+            }
+          : {}
+      }
+      color={selected ? "brand.400" : "brand.100"}
+      bg={selected ? "brand.100" : "brand.400"}
       onClick={() => setSelectedTab(item.title)}
     >
       <Flex align="center" height="20px" mr={2}>

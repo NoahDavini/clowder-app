@@ -1,18 +1,18 @@
 import { authModalState } from "@/src/atoms/authModalAtom";
 import { auth } from "@/src/firebase/clientApp";
+import useDirectory from "@/src/hooks/useDirectory";
 import { Flex, Icon, Input, Image } from "@chakra-ui/react";
 import { useRouter } from "next/router";
 import React from "react";
 import { useAuthState } from "react-firebase-hooks/auth";
-import { BsLink45Deg } from "react-icons/bs";
-import { FaReddit } from "react-icons/fa";
-import { IoImageOutline } from "react-icons/io5";
+import { RxImage, RxLink2 } from "react-icons/rx";
 import { useSetRecoilState } from "recoil";
 
 const CreatePostLink: React.FC = () => {
   const router = useRouter();
   const [user] = useAuthState(auth);
   const setAuthModalState = useSetRecoilState(authModalState);
+  const { toggleMenuOpen } = useDirectory();
 
   const onClick = () => {
     if (!user) {
@@ -20,52 +20,68 @@ const CreatePostLink: React.FC = () => {
       return;
     }
     const { communityId } = router.query;
-    router.push(`${communityId}/submit`);
+
+    if (communityId) {
+      router.push(`${communityId}/submit`);
+      return;
+    }
+
+    // Open directory menu
+    toggleMenuOpen();
   };
 
   return (
     <Flex
       justify="space-evenly"
       align="center"
-      bg="white"
+      bg="brand.400"
       height="56px"
       borderRadius={4}
       border="1px solid"
-      borderColor="gray.300"
       p={2}
       mb={4}
     >
-      {/* <Image src="/images/tvpartyIcon2.png" height="36px" mr={2} /> */}
       <Input
         placeholder="Create Post"
         fontSize="10pt"
-        _placeholder={{ color: "gray.500" }}
+        _placeholder={{ color: "brand.100" }}
         _hover={{
-          bg: "white",
           border: "1px solid",
-          borderColor: "blue.500",
+          borderColor: "brand.100",
         }}
         _focus={{
           outline: "none",
-          bg: "white",
           border: "1px solid",
-          borderColor: "blue.500",
+          borderColor: "brand.100",
         }}
-        bg="gray.50"
-        borderColor="gray.200"
+        bg="brand.400"
+        borderColor="brand.400"
         height="36px"
         borderRadius={4}
         mr={4}
         onClick={onClick}
       />
       <Icon
-        as={IoImageOutline}
-        fontSize={24}
+        as={RxImage}
+        fontSize={26}
         mr={4}
-        color="gray.400"
+        color="brand.100"
+        border="1px solid"
+        borderColor="brand.400"
+        borderRadius={4}
+        _hover={{ borderColor: "brand.100" }}
         cursor="pointer"
       />
-      <Icon as={BsLink45Deg} fontSize={24} color="gray.400" cursor="pointer" />
+      <Icon
+        as={RxLink2}
+        fontSize={24}
+        color="brand.100"
+        border="1px solid"
+        borderColor="brand.400"
+        borderRadius={4}
+        _hover={{ borderColor: "brand.100" }}
+        cursor="pointer"
+      />
     </Flex>
   );
 };

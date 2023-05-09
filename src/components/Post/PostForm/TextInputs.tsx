@@ -28,29 +28,39 @@ const TextInputs: React.FC<TextInputsProps> = ({
         fontSize="10pt"
         borderRadius={4}
         placeholder="Title"
-        _placeholder={{ color: "gray.500" }}
+        _placeholder={{ color: "brand.300" }}
+        _hover={{
+          borderColor: "brand.400",
+        }}
         _focus={{
           outline: "none",
-          bg: "white",
-          border: "1px solid",
-          borderColor: "black",
+          borderColor: "brand.400",
         }}
+        bg="brand.100"
+        border="1px solid"
+        borderColor="brand.100"
+        focusBorderColor="none"
       />
       <Textarea
         name="body"
         value={textInputs.body}
+        resize="none"
         onChange={onChange}
         fontSize="10pt"
         borderRadius={4}
         height="100px"
         placeholder="Text (optional)"
-        _placeholder={{ color: "gray.500" }}
+        _placeholder={{ color: "brand.300" }}
+        _hover={{
+          borderColor: "brand.400",
+        }}
         _focus={{
           outline: "none",
-          bg: "white",
-          border: "1px solid",
-          borderColor: "black",
+          borderColor: "brand.400",
         }}
+        bg="brand.100"
+        border="1px solid"
+        borderColor="brand.100"
       />
       <Flex justify="flex-end">
         <Button

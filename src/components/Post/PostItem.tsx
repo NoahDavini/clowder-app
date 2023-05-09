@@ -11,6 +11,7 @@ import {
   Text,
 } from "@chakra-ui/react";
 import moment from "moment";
+import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
@@ -23,6 +24,7 @@ import {
   IoArrowUpCircleSharp,
   IoBookmarkOutline,
 } from "react-icons/io5";
+import { SiYarn } from "react-icons/si";
 
 type PostItemProps = {
   post: Post;
@@ -36,6 +38,7 @@ type PostItemProps = {
   ) => void;
   onDeletePost: (post: Post) => Promise<boolean>;
   onSelectPost?: (post: Post) => void;
+  homePage?: boolean;
 };
 
 const PostItem: React.FC<PostItemProps> = ({
@@ -45,6 +48,7 @@ const PostItem: React.FC<PostItemProps> = ({
   onVote,
   onDeletePost,
   onSelectPost,
+  homePage,
 }) => {
   const [loadingImage, setLoadingImage] = useState(true);
   const [loadingDelete, setLoadingDelete] = useState(false);
@@ -77,39 +81,44 @@ const PostItem: React.FC<PostItemProps> = ({
 
   return (
     <Flex
-      border="1px solid"
-      bg="white"
-      borderColor={singlePostPage ? "white" : "gray.300"}
+      border="2px solid"
+      borderBottom={singlePostPage ? "none" : "brand.300"}
+      bg="brand.100"
+      borderColor={singlePostPage ? "brand.400" : "brand.300"}
       borderRadius={singlePostPage ? "4px 4px 0px 0px" : "4px"}
-      _hover={{ borderColor: singlePostPage ? "none" : "gray.500" }}
+      _hover={{ borderColor: singlePostPage ? "none" : "brand.400" }}
       cursor={singlePostPage ? "unset" : "pointer"}
       onClick={() => onSelectPost && onSelectPost(post)}
     >
       <Flex
         direction="column"
         align="center"
-        bg={singlePostPage ? "none" : "gray.100"}
+        bg={singlePostPage ? "none" : "brand.300"}
         p={2}
         width="40px"
-        borderRadius={singlePostPage ? "0" : "3px 0px 0px 3px"}
       >
         <Icon
           as={
             userVoteValue === 1 ? IoArrowUpCircleSharp : IoArrowUpCircleOutline
           }
-          color={userVoteValue === 1 ? "gray.700" : "gray.400"}
+          color={singlePostPage ? "brand.400" : "brand.100"}
           fontSize={22}
           onClick={(event) => onVote(event, post, 1, post.communityId)}
           cursor="pointer"
         />
-        <Text fontSize="9pt">{post.voteStatus}</Text>
+        <Text
+          fontSize="11pt"
+          color={singlePostPage ? "brand.400" : "brand.100"}
+        >
+          {post.voteStatus}
+        </Text>
         <Icon
           as={
             userVoteValue === -1
               ? IoArrowDownCircleSharp
               : IoArrowDownCircleOutline
           }
-          color={userVoteValue === -1 ? "#4379ff" : "gray.400"}
+          color={singlePostPage ? "brand.400" : "brand.100"}
           fontSize={22}
           onClick={(event) => onVote(event, post, -1, post.communityId)}
           cursor="pointer"
@@ -125,6 +134,28 @@ const PostItem: React.FC<PostItemProps> = ({
         <Stack spacing={1} p="10px">
           <Stack direction="row" spacing={0.6} align="center" fontSize="9pt">
             {/* Home Page Check */}
+            {homePage && (
+              <>
+                {post.communityImageURL ? (
+                  <Image
+                    src={post.communityImageURL}
+                    borderRadius="full"
+                    boxSize="18px"
+                    mr={2}
+                  />
+                ) : (
+                  <Icon as={SiYarn} fontSize="18pt" mr={1} color="brand.400" />
+                )}
+                <Link href={`communities/${post.communityId}`}>
+                  <Text
+                    fontWeight={700}
+                    _hover={{ textDecoration: "underline" }}
+                    onClick={(event) => event.stopPropagation()}
+                  >{`${post.communityId}`}</Text>
+                </Link>
+                <Icon as={BsDot} color="gray.500" fontSize={8} />
+              </>
+            )}
             <Text>
               Posted by {post.creatorDisplayName}{" "}
               {moment(new Date(post.createdAt?.seconds * 1000)).fromNow()}
@@ -149,12 +180,14 @@ const PostItem: React.FC<PostItemProps> = ({
             </Flex>
           )}
         </Stack>
-        <Flex ml={1} mb={0.5} color="gray.500">
+        <Flex ml={1} mb={0.5} color="brand.400">
           <Flex
             align="center"
             p="8px 10px"
+            border="1px solid"
+            borderColor="brand.100"
             borderRadius={4}
-            _hover={{ bg: "gray.200" }}
+            _hover={{ borderColor: "brand.400" }}
             cursor="pointer"
           >
             <Icon as={BsChat} mr={2} />
@@ -163,8 +196,10 @@ const PostItem: React.FC<PostItemProps> = ({
           <Flex
             align="center"
             p="8px 10px"
+            border="1px solid"
+            borderColor="brand.100"
             borderRadius={4}
-            _hover={{ bg: "gray.200" }}
+            _hover={{ borderColor: "brand.400" }}
             cursor="pointer"
           >
             <Icon as={IoArrowRedoOutline} mr={2} />
@@ -173,8 +208,10 @@ const PostItem: React.FC<PostItemProps> = ({
           <Flex
             align="center"
             p="8px 10px"
+            border="1px solid"
+            borderColor="brand.100"
             borderRadius={4}
-            _hover={{ bg: "gray.200" }}
+            _hover={{ borderColor: "brand.400" }}
             cursor="pointer"
           >
             <Icon as={IoBookmarkOutline} mr={2} />
@@ -184,8 +221,10 @@ const PostItem: React.FC<PostItemProps> = ({
             <Flex
               align="center"
               p="8px 10px"
+              border="1px solid"
+              borderColor="brand.100"
               borderRadius={4}
-              _hover={{ bg: "gray.200" }}
+              _hover={{ borderColor: "brand.400" }}
               cursor="pointer"
               onClick={handleDelete}
             >

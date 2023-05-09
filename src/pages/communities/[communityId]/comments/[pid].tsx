@@ -14,10 +14,18 @@ import { useAuthState } from "react-firebase-hooks/auth";
 
 const PostPage = () => {
   const [user] = useAuthState(auth);
-  const { postStateValue, setPostStateValue, onVote, onDeletePost } =
-    usePosts();
   const router = useRouter();
+  const { community, pid } = router.query;
   const { communityStateValue } = useCommunityData();
+
+  const {
+    postStateValue,
+    setPostStateValue,
+    onVote,
+    onDeletePost,
+    loading,
+    setLoading,
+  } = usePosts();
 
   const fetchPost = async (postId: string) => {
     try {

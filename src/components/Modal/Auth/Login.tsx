@@ -42,19 +42,17 @@ const Login: React.FC<LoginProps> = () => {
         mb={2}
         onChange={onChange}
         fontSize="10pt"
-        _placeholder={{ color: "gray.500" }}
+        _placeholder={{ color: "brand.300" }}
         _hover={{
-          bg: "white",
-          border: "1px solid",
-          borderColor: "blue.500",
+          borderColor: "brand.400",
         }}
         _focus={{
           outline: "none",
-          bg: "white",
-          border: "1px solid",
-          borderColor: "blue.500",
+          borderColor: "brand.400",
         }}
-        bg="gray.50"
+        bg="brand.100"
+        border="1px solid"
+        borderColor="brand.100"
       />
       <Input
         required
@@ -64,21 +62,19 @@ const Login: React.FC<LoginProps> = () => {
         onChange={onChange}
         mb={2}
         fontSize="10pt"
-        _placeholder={{ color: "gray.500" }}
+        _placeholder={{ color: "brand.300" }}
         _hover={{
-          bg: "white",
-          border: "1px solid",
-          borderColor: "blue.500",
+          borderColor: "brand.400",
         }}
         _focus={{
           outline: "none",
-          bg: "white",
-          border: "1px solid",
-          borderColor: "blue.500",
+          borderColor: "brand.400",
         }}
-        bg="gray.50"
+        bg="brand.100"
+        border="1px solid"
+        borderColor="brand.100"
       />
-      <Text textAlign="center" color="red" fontSize="10pt">
+      <Text textAlign="center" color="brand.200" fontSize="10pt">
         {FIREBASE_ERRORS[error?.message as keyof typeof FIREBASE_ERRORS]}
       </Text>
       <Button
@@ -97,7 +93,7 @@ const Login: React.FC<LoginProps> = () => {
         </Text>
         <Text
           fontSize="9pt"
-          color="blue.500"
+          color="brand.300"
           fontWeight={700}
           cursor="pointer"
           onClick={() =>
@@ -113,7 +109,7 @@ const Login: React.FC<LoginProps> = () => {
       <Flex fontSize="9pt" justifyContent="center">
         <Text mr={1}>New here?</Text>
         <Text
-          color="blue.500"
+          color="brand.300"
           fontWeight={700}
           cursor="pointer"
           onClick={() =>

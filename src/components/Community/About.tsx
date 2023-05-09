@@ -62,17 +62,24 @@ const About: React.FC<AboutProps> = ({ communityData }) => {
       <Flex
         justify="space-between"
         align="center"
-        bg="gray.700"
-        color="white"
+        bg="brand.400"
+        color="brand.100"
         p={3}
         borderRadius="4px 4px 0px 0px"
       >
         <Text fontSize="10pt" fontWeight={700}>
-          About Community
+          About {communityData.id}
         </Text>
         <Icon as={HiOutlineDotsHorizontal} />
       </Flex>
-      <Flex direction="column" p={3} bg="white" borderRadius="0px 0px 4px 4px">
+      <Flex
+        direction="column"
+        p={3}
+        bg="brand.100"
+        border="2px solid"
+        borderColor="brand.400"
+        borderRadius="0px 0px 4px 4px"
+      >
         <Stack>
           <Flex width="100%" p={2} fontSize="10pt" fontWeight={700}>
             <Flex direction="column" flexGrow={1}>

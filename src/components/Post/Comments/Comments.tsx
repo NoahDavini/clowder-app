@@ -149,7 +149,14 @@ const Comments: React.FC<CommentsProps> = ({
   }, [selectedPost]);
 
   return (
-    <Box bg="white" borderRadius="0px 0px 4px 4px" p={2}>
+    <Box
+      bg="brand.100"
+      borderRadius="0px 0px 4px 4px"
+      p={2}
+      border="2px solid"
+      borderTop="none"
+      borderColor="brand.400"
+    >
       <Flex
         direction="column"
         pl={10}
@@ -181,15 +188,8 @@ const Comments: React.FC<CommentsProps> = ({
         ) : (
           <>
             {comments.length === 0 ? (
-              <Flex
-                direction="column"
-                justify="center"
-                align="center"
-                borderTop="1px solid"
-                borderColor="gray.100"
-                p={20}
-              >
-                <Text fontWeight={700} opacity={0.3}>
+              <Flex direction="column" justify="center" align="center" p={20}>
+                <Text fontWeight={700} color="brand.300">
                   No Comments Yet
                 </Text>
               </Flex>

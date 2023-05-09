@@ -37,17 +37,18 @@ const usePosts = () => {
       return;
     }
 
-    try {
-      const { voteStatus } = post;
-      const existingVote = postStateValue.postVotes.find(
-        (vote) => vote.postId === post.id
-      );
+    const { voteStatus } = post;
+    const existingVote = postStateValue.postVotes.find(
+      (vote) => vote.postId === post.id
+    );
 
+    try {
+      let voteChange = vote;
       const batch = writeBatch(firestore);
+
       const updatedPost = { ...post };
       const updatedPosts = [...postStateValue.posts];
       let updatedPostVotes = [...postStateValue.postVotes];
-      let voteChange = vote;
 
       // New vote
       if (!existingVote) {
@@ -74,44 +75,44 @@ const usePosts = () => {
         const postVoteRef = doc(
           firestore,
           "users",
-          `${user?.uid}/postVotes/${existingVote.id}`
+          `${user.uid}/postVotes/${existingVote.id}`
         );
 
         // Removing vote (up -> neutral OR down -> neutral)
         if (existingVote.voteValue === vote) {
           // +/- 1 to/from post.voteStatus
+          voteChange *= -1;
           updatedPost.voteStatus = voteStatus - vote;
           updatedPostVotes = updatedPostVotes.filter(
             (vote) => vote.id !== existingVote.id
           );
-
           // Delete postVote document
           batch.delete(postVoteRef);
-
-          voteChange *= -1;
         }
         // Flipping vote (up -> down OR down -> up)
         else {
           // +/- 2 to/from post.voteStatus
+          voteChange = 2 * vote;
           updatedPost.voteStatus = voteStatus + 2 * vote;
-
           const voteIdx = postStateValue.postVotes.findIndex(
             (vote) => vote.id === existingVote.id
           );
 
-          updatedPostVotes[voteIdx] = {
-            ...existingVote,
-            voteValue: vote,
-          };
-
+          // Vote found
+          if (voteIdx !== -1) {
+            updatedPostVotes[voteIdx] = {
+              ...existingVote,
+              voteValue: vote,
+            };
+          }
           // Update existing postVote document
           batch.update(postVoteRef, {
             voteValue: vote,
           });
-
-          voteChange = 2 * vote;
         }
       }
+
+      let updatedState = { ...postStateValue, postVotes: updatedPostVotes };
 
       // Update state with updated values
       const postIdx = postStateValue.posts.findIndex(

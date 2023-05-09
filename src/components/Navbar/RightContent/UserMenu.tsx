@@ -12,12 +12,11 @@ import {
 import { signOut, User } from "firebase/auth";
 import React from "react";
 import { VscAccount } from "react-icons/vsc";
-import { CgProfile } from "react-icons/cg";
 import { MdOutlineLogin } from "react-icons/md";
 import { auth } from "@/src/firebase/clientApp";
-import { useResetRecoilState, useSetRecoilState } from "recoil";
+import { useSetRecoilState } from "recoil";
 import { authModalState } from "@/src/atoms/authModalAtom";
-import { communityState } from "@/src/atoms/communitiesAtom";
+import { IoPersonCircle, IoPersonCircleOutline } from "react-icons/io5";
 
 type UserMenuProps = {
   user?: User | null;
@@ -36,14 +35,19 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
       <MenuButton
         cursor="pointer"
         padding="0px 6px"
-        borderRadius={4}
-        _hover={{ outline: "1px solid", outlineColor: "gray.200" }}
+        borderRadius="2px"
+        _hover={{ outline: "1px solid", outlineColor: "brand.100" }}
       >
         <Flex align="center">
           <Flex align="center">
             {user ? (
               <>
-                <Icon as={CgProfile} fontSize={24} mr={1} color="gray.700" />
+                <Icon
+                  as={IoPersonCircle}
+                  fontSize={24}
+                  mr={1}
+                  color="brand.100"
+                />
                 <Flex
                   direction="column"
                   display={{ base: "none", lg: "flex" }}
@@ -51,7 +55,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
                   align="flex-start"
                   mr={8}
                 >
-                  <Text fontWeight={700}>
+                  <Text fontWeight={700} color="brand.100">
                     {user?.displayName || user.email?.split("@")[0]}
                   </Text>
                 </Flex>
@@ -60,7 +64,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
               <Icon as={VscAccount} fontSize={24} color="gray.400" mr={1} />
             )}
           </Flex>
-          <ChevronDownIcon />
+          <ChevronDownIcon color="brand.100" />
         </Flex>
       </MenuButton>
       <MenuList>
@@ -69,10 +73,10 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
             <MenuItem
               fontSize="10pt"
               fontWeight={700}
-              _hover={{ bg: "blue.500", color: "white" }}
+              _hover={{ bg: "brand.300", color: "brand.100" }}
             >
               <Flex align="center">
-                <Icon as={CgProfile} fontSize={20} mr={2} />
+                <Icon as={IoPersonCircleOutline} fontSize={20} mr={2} />
                 Profile
               </Flex>
             </MenuItem>
@@ -80,7 +84,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
             <MenuItem
               fontSize="10pt"
               fontWeight={700}
-              _hover={{ bg: "blue.500", color: "white" }}
+              _hover={{ bg: "brand.300", color: "brand.100" }}
               onClick={logout}
             >
               <Flex align="center">
@@ -94,7 +98,7 @@ const UserMenu: React.FC<UserMenuProps> = ({ user }) => {
             <MenuItem
               fontSize="10pt"
               fontWeight={700}
-              _hover={{ bg: "blue.500", color: "white" }}
+              _hover={{ bg: "brand.300", color: "brand.100" }}
               onClick={() => setAuthModalState({ open: true, view: "login" })}
             >
               <Flex align="center">

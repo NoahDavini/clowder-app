@@ -19,24 +19,28 @@ const SearchInput: React.FC<SearchInputProps> = ({ user }) => {
       <InputGroup>
         <InputLeftElement
           pointerEvents="none"
-          children={<SearchIcon color="gray.400" mb={1} />}
+          children={<SearchIcon color="brand.100" mb={1} />}
         />
         <Input
-          placeholder="Search TVparty"
+          variant="filled"
+          placeholder="Search Clowder"
           fontSize="10pt"
-          _placeholder={{ color: "gray.500" }}
+          _placeholder={{ color: "brand.100" }}
           _hover={{
-            bg: "white",
             border: "1px solid",
-            borderColor: "blue.500",
+            borderColor: "brand.100",
           }}
           _focus={{
             outline: "none",
             border: "1px solid",
-            borderColor: "blue.500",
+            borderColor: "brand.100",
           }}
           height="34px"
-          bg="gray.50"
+          bg="brand.400"
+          border="1px solid"
+          borderRadius="5px"
+          borderColor="brand.400"
+          focusBorderColor="none"
         />
       </InputGroup>
     </Flex>

@@ -8,7 +8,7 @@ const AuthButtons: React.FC = () => {
   return (
     <>
       <Button
-        variant="outline"
+        variant="auth"
         height="28px"
         display={{ base: "none", sm: "flex" }}
         width={{ base: "70px", md: "100px" }}
@@ -18,7 +18,7 @@ const AuthButtons: React.FC = () => {
         Log In
       </Button>
       <Button
-        variant="solid"
+        variant="auth"
         height="28px"
         display={{ base: "none", sm: "flex" }}
         width={{ base: "70px", md: "100px" }}

@@ -1,4 +1,5 @@
 import { auth, firestore } from "@/src/firebase/clientApp";
+import useDirectory from "@/src/hooks/useDirectory";
 import {
   Box,
   Button,
@@ -45,6 +46,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
   const [communityType, setCommunityType] = useState("public");
   const [error, setError] = useState("");
   const [loading, setLoading] = useState(false);
+  const { toggleMenuOpen } = useDirectory();
   const router = useRouter();
 
   const handleChange = (event: React.ChangeEvent<HTMLInputElement>) => {
@@ -103,6 +105,11 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
           }
         );
       });
+
+      handleClose();
+      toggleMenuOpen();
+
+      router.push(`communities/${communityName}`);
     } catch (error: any) {
       console.log("handleCreateCommunity error", error);
       setError(error.message);
@@ -116,53 +123,65 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
   return (
     <>
       <Modal isOpen={open} onClose={handleClose} size="lg">
-        <ModalOverlay />
-        <ModalContent>
+        <ModalOverlay backdropFilter="blur(5px)" />
+        <ModalContent borderRadius="10px">
           <ModalHeader
             display="flex"
             flexDirection="column"
             fontSize={15}
             padding={3}
+            borderRadius="10px 10px 0px 0px"
+            color="brand.100"
+            bg="brand.400"
           >
             Create a community
           </ModalHeader>
-          <Box pl={3} pr={3}>
+          <Box pl={3} pr={3} bg="brand.100">
             <Divider />
-            <ModalCloseButton />
+            <ModalCloseButton
+              color="brand.100"
+              border="1px solid"
+              borderColor="brand.400"
+              _hover={{
+                border: "1px solid",
+                borderColor: "brand.100",
+              }}
+              _focus={{
+                outline: "none",
+                border: "1px solid",
+                borderColor: "brand.100",
+              }}
+            />
             <ModalBody display="flex" flexDirection="column" padding="10px 0px">
-              <Text fontWeight={600} fontSize={15}>
-                Name
-              </Text>
-              <Text fontSize={11} color="gray.500">
-                Community names including captitalization cannot be changed
-              </Text>
-              <Text
-                position="relative"
-                top="28px"
-                left="10px"
-                width="20px"
-                color="gray.400"
-              >
-                r/
-              </Text>
               <Input
-                position="relative"
                 value={communityName}
-                size="sm"
-                pl="22px"
+                placeholder="Community name"
+                size="md"
+                color="brand.400"
+                border="1px solid"
+                borderRadius="5px"
+                borderColor="brand.100"
+                focusBorderColor="none"
+                _placeholder={{ color: "brand.300" }}
+                _hover={{
+                  border: "1px solid",
+                  borderColor: "brand.400",
+                }}
+                _focus={{
+                  outline: "none",
+                  border: "1px solid",
+                  borderColor: "brand.400",
+                }}
                 onChange={handleChange}
               />
-              <Text
-                fontSize="9pt"
-                color={charsRemaining === 0 ? "red" : "gray.500"}
-              >
+              <Text fontSize="10pt" color="brand.300">
                 {charsRemaining} Characters remaining
               </Text>
-              <Text fontSize="9pt" color="red" pt={1}>
+              <Text fontSize="9pt" color="brand.200" pt={1}>
                 {error}
               </Text>
               <Box mt={4} mb={4}>
-                <Text fontWeight={600} fontSize={15}>
+                <Text fontWeight={600} fontSize={15} color="brand.400">
                   Community Type
                 </Text>
                 {/* checkbox */}
@@ -171,13 +190,15 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
                     name="public"
                     isChecked={communityType === "public"}
                     onChange={onCommunityTypeChange}
+                    colorScheme="red"
+                    iconColor="brand.100"
                   >
                     <Flex align="center">
-                      <Icon as={BsFillPersonFill} color="gray.500" mr={2} />
-                      <Text fontSize="10pt" mr={1}>
+                      <Icon as={BsFillPersonFill} color="brand.400" mr={2} />
+                      <Text fontSize="11pt" color="brand.400" mr={2}>
                         Public
                       </Text>
-                      <Text fontSize="9pt" color="gray.500" pt={1}>
+                      <Text fontSize="9pt" color="brand.300" pt={0.5}>
                         Anyone can view, post, and comment to this community
                       </Text>
                     </Flex>
@@ -186,13 +207,15 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
                     name="restricted"
                     isChecked={communityType === "restricted"}
                     onChange={onCommunityTypeChange}
+                    colorScheme="red"
+                    iconColor="brand.100"
                   >
                     <Flex align="center">
-                      <Icon as={BsFillEyeFill} color="gray.500" mr={2} />
-                      <Text fontSize="10pt" mr={1}>
+                      <Icon as={BsFillEyeFill} color="brand.400" mr={2} />
+                      <Text fontSize="11pt" color="brand.400" mr={2}>
                         Restriced
                       </Text>
-                      <Text fontSize="9pt" color="gray.500" pt={1}>
+                      <Text fontSize="9pt" color="brand.300" pt={0.5}>
                         Anyone can view this community, but only approved users
                         can post
                       </Text>
@@ -202,13 +225,15 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
                     name="private"
                     isChecked={communityType === "private"}
                     onChange={onCommunityTypeChange}
+                    colorScheme="red"
+                    iconColor="brand.100"
                   >
                     <Flex align="center">
-                      <Icon as={HiLockClosed} color="gray.500" mr={2} />
-                      <Text fontSize="10pt" mr={1}>
+                      <Icon as={HiLockClosed} color="brand.400" mr={2} />
+                      <Text fontSize="11pt" color="brand.400" mr={2}>
                         Private
                       </Text>
-                      <Text fontSize="9pt" color="gray.500" pt={1}>
+                      <Text fontSize="9pt" color="brand.300" pt={0.5}>
                         Only approved users can view and submit to this
                         community
                       </Text>
@@ -218,7 +243,7 @@ const CreateCommunityModal: React.FC<CreateCommunityModalProps> = ({
               </Box>
             </ModalBody>
           </Box>
-          <ModalFooter bg="gray.100" borderRadius="0px 0px 10px 10px">
+          <ModalFooter bg="brand.100" borderRadius="0px 0px 10px 10px">
             <Button
               variant="outline"
               height="30px"
