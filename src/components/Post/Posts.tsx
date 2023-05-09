@@ -11,7 +11,7 @@ import PostItem from "./PostItem";
 import PostLoader from "./PostLoader";
 
 type PostsProps = {
-  communityData?: Community;
+  communityData: Community;
   userId?: string;
   loadingUser: boolean;
 };
