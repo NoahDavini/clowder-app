@@ -18,14 +18,8 @@ const PostPage = () => {
   const { community, pid } = router.query;
   const { communityStateValue } = useCommunityData();
 
-  const {
-    postStateValue,
-    setPostStateValue,
-    onVote,
-    onDeletePost,
-    loading,
-    setLoading,
-  } = usePosts();
+  const { postStateValue, setPostStateValue, onVote, onDeletePost } =
+    usePosts();
 
   const fetchPost = async (postId: string) => {
     try {
