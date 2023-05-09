@@ -15,7 +15,7 @@ import Link from "next/link";
 import { useRouter } from "next/router";
 import React, { useState } from "react";
 import { AiOutlineDelete } from "react-icons/ai";
-import { BsChat, BsDot } from "react-icons/bs";
+import { BsCCircleFill, BsChat, BsDot } from "react-icons/bs";
 import {
   IoArrowDownCircleOutline,
   IoArrowDownCircleSharp,
@@ -144,7 +144,12 @@ const PostItem: React.FC<PostItemProps> = ({
                     mr={2}
                   />
                 ) : (
-                  <Icon as={SiYarn} fontSize="18pt" mr={1} color="brand.400" />
+                  <Icon
+                    as={BsCCircleFill}
+                    fontSize="18pt"
+                    mr={1}
+                    color="brand.400"
+                  />
                 )}
                 <Link href={`communities/${post.communityId}`}>
                   <Text

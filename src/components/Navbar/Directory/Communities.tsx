@@ -4,8 +4,7 @@ import CreateCommunityModal from "../../Modal/CreateCommunity/CreateCommunityMod
 import { useRecoilValue } from "recoil";
 import { communityState } from "@/src/atoms/communitiesAtom";
 import MenuListItem from "./MenuListItem";
-import { BsPlusLg } from "react-icons/bs";
-import { FaPaw } from "react-icons/fa";
+import { BsCCircleFill, BsPlusLg } from "react-icons/bs";
 
 type CommunitiesProps = {};
 
@@ -25,7 +24,7 @@ const Communities: React.FC<CommunitiesProps> = () => {
           .map((snippet) => (
             <MenuListItem
               key={snippet.communityId}
-              icon={FaPaw}
+              icon={BsCCircleFill}
               displayText={`${snippet.communityId}`}
               link={`/communities/${snippet.communityId}`}
               iconColor="brand.200"
@@ -52,7 +51,7 @@ const Communities: React.FC<CommunitiesProps> = () => {
         {mySnippets.map((snippet) => (
           <MenuListItem
             key={snippet.communityId}
-            icon={FaPaw}
+            icon={BsCCircleFill}
             displayText={`${snippet.communityId}`}
             link={`/communities/${snippet.communityId}`}
             iconColor="brand.300"
