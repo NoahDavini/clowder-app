@@ -22,16 +22,16 @@ const CommunityPage: NextPage<CommunityPageProps> = ({ communityData }) => {
   const [communityStateValue, setCommunityStateValue] =
     useRecoilState(communityState);
 
-  if (!communityData) {
-    return <CommunityNotFound />;
-  }
-
   useEffect(() => {
     setCommunityStateValue((prev) => ({
       ...prev,
       currentCommunity: communityData,
     }));
   }, [communityData]);
+
+  if (!communityData) {
+    return <CommunityNotFound />;
+  }
 
   return (
     <>
